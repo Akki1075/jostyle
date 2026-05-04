@@ -1,0 +1,47 @@
+{
+  "businessName": "JO'STYLE",
+  "tagline": "All Ladies Fashion - One Place",
+  "phone": "7893634888",
+  "address": "Airport Road, Gadala, Rajahmundry - 533102",
+  "instagram": "https://www.instagram.com/jostyle",
+  "images": {
+    "hero": "images/hero.jpg"
+  },
+  "founder": {
+    "name": "Jyothi Yarramilli",
+    "image": "images/founder.jpg",
+    "description": "Jyothi Yarramilli is the founder of JO'STYLE, a boutique ladies fashion studio focused on neat tailoring, elegant finishing, and personal attention for every customer."
+  },
+  "services": [
+    {
+      "name": "Computer Embroidery",
+      "description": "Precise embroidery work for blouses, sarees, dress materials, and custom festive outfits."
+    },
+    {
+      "name": "Maggam Work",
+      "description": "Detailed hand-finish inspired embellishment work for bridal, occasion, and traditional wear."
+    },
+    {
+      "name": "Blouse Stitching",
+      "description": "Custom blouse stitching with careful measurement, fitting, lining, and finishing."
+    },
+    {
+      "name": "Saree Pre-Pleating",
+      "description": "Ready-to-wear saree pleating service for comfortable draping and a polished look."
+    }
+  ],
+  "gallery": [
+    {
+      "src": "images/hero.jpg",
+      "alt": "JO'STYLE boutique business card"
+    },
+    {
+      "src": "images/sample1.jpg",
+      "alt": "JO'STYLE services card"
+    },
+    {
+      "src": "images/sample2.jpg",
+      "alt": "Ladies fashion services offered by JO'STYLE"
+    }
+  ]
+}
