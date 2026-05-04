@@ -16,6 +16,8 @@ JO'STYLE/
     founder.jpg
     sample1.jpg
     sample2.jpg
+    services/
+      computer-embroidery-1.jpg
     sarees/
       silk-1.jpg
       silk-2.jpg
@@ -40,6 +42,7 @@ Recommended file names:
 - `images/hero.jpg` for the full-screen hero background
 - `images/founder.jpg` for Jyothi Yarramilli's founder photo
 - `images/sample1.jpg`, `images/sample2.jpg`, `images/sample3.jpg` for gallery images
+- `images/services/computer-embroidery-1.jpg` for Computer Embroidery examples
 - `images/sarees/silk-1.jpg`, `images/sarees/silk-2.jpg` for silk saree examples
 - `images/sarees/cotton-1.jpg`, `images/sarees/cotton-2.jpg` for cotton saree examples
 - `images/sarees/designer-1.jpg`, `images/sarees/designer-2.jpg` for designer saree examples
@@ -51,6 +54,41 @@ After adding a new gallery image, add it to `data.json` like this:
   "src": "images/sample3.jpg",
   "alt": "Maggam work blouse design"
 }
+```
+
+## How To Update Service Photos
+
+Service cards on the home page are clickable. When a customer clicks a service, it opens a popup with photos related to that service.
+
+To replace the Computer Embroidery example photo:
+
+1. Open `images/services/`.
+2. Replace `computer-embroidery-1.jpg` with your new photo using the same exact file name.
+3. Commit and push.
+
+To add more photos to any service, edit that service inside `data.json`:
+
+```json
+{
+  "name": "Computer Embroidery",
+  "description": "Precise embroidery work for blouses, sarees, dress materials, and custom festive outfits.",
+  "images": [
+    {
+      "src": "images/services/computer-embroidery-1.jpg",
+      "alt": "Computer embroidery devotional design"
+    },
+    {
+      "src": "images/services/computer-embroidery-2.jpg",
+      "alt": "Computer embroidery blouse design"
+    }
+  ]
+}
+```
+
+Then add the matching file:
+
+```text
+images/services/computer-embroidery-2.jpg
 ```
 
 ## How To Update Saree Sales

@@ -15,19 +15,28 @@
   "services": [
     {
       "name": "Computer Embroidery",
-      "description": "Precise embroidery work for blouses, sarees, dress materials, and custom festive outfits."
+      "description": "Precise embroidery work for blouses, sarees, dress materials, and custom festive outfits.",
+      "images": [
+        {
+          "src": "images/services/computer-embroidery-1.jpg",
+          "alt": "Computer embroidery devotional design with stone work"
+        }
+      ]
     },
     {
       "name": "Maggam Work",
-      "description": "Detailed hand-finish inspired embellishment work for bridal, occasion, and traditional wear."
+      "description": "Detailed hand-finish inspired embellishment work for bridal, occasion, and traditional wear.",
+      "images": []
     },
     {
       "name": "Blouse Stitching",
-      "description": "Custom blouse stitching with careful measurement, fitting, lining, and finishing."
+      "description": "Custom blouse stitching with careful measurement, fitting, lining, and finishing.",
+      "images": []
     },
     {
       "name": "Saree Pre-Pleating",
-      "description": "Ready-to-wear saree pleating service for comfortable draping and a polished look."
+      "description": "Ready-to-wear saree pleating service for comfortable draping and a polished look.",
+      "images": []
     }
   ],
   "gallery": [

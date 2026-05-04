@@ -45,20 +45,89 @@ const renderServices = (services) => {
 
   servicesGrid.innerHTML = services
     .map(
-      (service) => `
-        <article class="service-card reveal">
+      (service, index) => `
+        <button class="service-card reveal" type="button" data-service-index="${index}">
           <h3>${service.name}</h3>
           <p>${service.description}</p>
-        </article>
+          <span>${service.images && service.images.length ? "View examples" : "Details coming soon"}</span>
+        </button>
       `
     )
     .join("");
+
+  qsa("[data-service-index]", servicesGrid).forEach((card) => {
+    card.addEventListener("click", () => {
+      openServiceModal(services[Number(card.dataset.serviceIndex)]);
+    });
+  });
 
   services.forEach((service) => {
     const option = document.createElement("option");
     option.value = service.name;
     option.textContent = service.name;
     serviceSelect.append(option);
+  });
+};
+
+const closeServiceModal = () => {
+  const modal = qs("[data-service-modal]");
+
+  if (!modal) return;
+
+  modal.classList.remove("open");
+  modal.setAttribute("aria-hidden", "true");
+};
+
+const openServiceModal = (service) => {
+  const modal = qs("[data-service-modal]");
+  const title = qs("[data-service-modal-title]");
+  const description = qs("[data-service-modal-description]");
+  const gallery = qs("[data-service-modal-gallery]");
+
+  if (!modal || !title || !description || !gallery) return;
+
+  const images = service.images || [];
+  title.textContent = service.name;
+  description.textContent = service.description;
+  gallery.innerHTML = images.length
+    ? images
+        .map(
+          (image) => `
+            <button class="service-modal-image" type="button" data-service-image="${image.src}" data-service-alt="${image.alt}" aria-label="Open ${image.alt}">
+              <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+            </button>
+          `
+        )
+        .join("")
+    : '<p class="service-empty">Photos for this service will be added soon.</p>';
+
+  qsa("[data-service-image]", gallery).forEach((button) => {
+    button.addEventListener("click", () => {
+      openLightbox(button.dataset.serviceImage, button.dataset.serviceAlt);
+    });
+  });
+
+  modal.classList.add("open");
+  modal.setAttribute("aria-hidden", "false");
+};
+
+const initServiceModal = () => {
+  const modal = qs("[data-service-modal]");
+  const close = qs("[data-service-modal-close]");
+
+  if (!modal || !close) return;
+
+  close.addEventListener("click", closeServiceModal);
+  modal.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      closeServiceModal();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeServiceModal();
+    }
   });
 };
 
@@ -324,6 +393,7 @@ const renderSite = (data) => {
   renderHomePage(data);
   renderSareeTypes(data);
   initLightbox();
+  initServiceModal();
   initRevealAnimations();
 };
 

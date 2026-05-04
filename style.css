@@ -290,7 +290,19 @@ a {
   position: relative;
   min-height: 220px;
   overflow: hidden;
+  border: 1px solid var(--line);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
   padding: 26px;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.service-card:hover {
+  border-color: rgba(215, 170, 84, 0.7);
+  box-shadow: 0 28px 78px rgba(43, 7, 16, 0.2);
+  transform: translateY(-4px);
 }
 
 .service-card::before {
@@ -314,6 +326,14 @@ a {
   margin: 0;
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.service-card span {
+  display: inline-flex;
+  margin-top: 20px;
+  color: var(--maroon);
+  font-size: 0.82rem;
+  font-weight: 800;
 }
 
 .gallery-section,
@@ -634,6 +654,100 @@ dd {
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
 }
 
+.service-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 6, 10, 0.72);
+  padding: 22px;
+}
+
+.service-modal.open {
+  display: flex;
+}
+
+.service-modal-panel {
+  position: relative;
+  width: min(980px, 100%);
+  max-height: min(84vh, 900px);
+  overflow: auto;
+  border: 1px solid rgba(245, 220, 157, 0.32);
+  border-radius: var(--radius);
+  background: var(--ivory);
+  box-shadow: 0 26px 90px rgba(0, 0, 0, 0.38);
+  padding: clamp(22px, 4vw, 40px);
+}
+
+.service-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  min-height: 38px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--maroon);
+  background: var(--white);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  padding: 8px 12px;
+}
+
+.service-modal-panel h2 {
+  max-width: 720px;
+  margin: 0;
+  color: var(--maroon-dark);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  line-height: 1.05;
+}
+
+.service-modal-panel > p:not(.eyebrow) {
+  max-width: 720px;
+  color: var(--muted);
+}
+
+.service-modal-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 26px;
+}
+
+.service-modal-image {
+  min-height: 330px;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--maroon-dark);
+  cursor: zoom-in;
+  padding: 0;
+}
+
+.service-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 380ms ease;
+}
+
+.service-modal-image:hover img {
+  transform: scale(1.04);
+}
+
+.service-empty {
+  margin: 0;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  color: var(--muted);
+  background: var(--white);
+  padding: 24px;
+}
+
 .whatsapp-float {
   position: fixed;
   right: 18px;
@@ -754,5 +868,14 @@ dd {
 
   .saree-type-copy {
     padding: 24px;
+  }
+
+  .service-modal {
+    padding: 12px;
+  }
+
+  .service-modal-panel {
+    max-height: 88vh;
+    padding-top: 58px;
   }
 }
