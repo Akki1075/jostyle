@@ -26,9 +26,22 @@ const setHref = (selector, value) => {
   });
 };
 
+const setSharedContent = (data) => {
+  setText("[data-business-name]", data.businessName);
+  setText("[data-tagline]", data.tagline);
+  setText("[data-address]", data.address);
+  setHref("[data-phone-link]", `tel:${cleanPhone(data.phone)}`);
+  setText("[data-phone-link]", data.phone);
+  setHref("[data-instagram]", data.instagram);
+  setHref("[data-map-link]", mapUrl(data.address));
+  setHref("[data-whatsapp-link]", whatsappUrl(data.phone));
+};
+
 const renderServices = (services) => {
   const servicesGrid = qs("[data-services]");
   const serviceSelect = qs("[data-service-select]");
+
+  if (!servicesGrid || !serviceSelect) return;
 
   servicesGrid.innerHTML = services
     .map(
@@ -49,8 +62,34 @@ const renderServices = (services) => {
   });
 };
 
+const openLightbox = (src, alt) => {
+  const lightbox = qs("[data-lightbox]");
+  const lightboxImage = qs("[data-lightbox-image]");
+
+  if (!lightbox || !lightboxImage) return;
+
+  lightboxImage.src = src;
+  lightboxImage.alt = alt;
+  lightbox.classList.add("open");
+};
+
+const initLightbox = () => {
+  const lightbox = qs("[data-lightbox]");
+  const lightboxImage = qs("[data-lightbox-image]");
+
+  if (!lightbox || !lightboxImage) return;
+
+  lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("open");
+    lightboxImage.src = "";
+  });
+};
+
 const renderGallery = (images) => {
   const gallery = qs("[data-gallery]");
+
+  if (!gallery) return;
+
   gallery.innerHTML = images
     .map(
       (image) => `
@@ -61,25 +100,18 @@ const renderGallery = (images) => {
     )
     .join("");
 
-  const lightbox = qs("[data-lightbox]");
-  const lightboxImage = qs("[data-lightbox-image]");
-
   qsa(".gallery-item", gallery).forEach((button, index) => {
     button.addEventListener("click", () => {
-      lightboxImage.src = images[index].src;
-      lightboxImage.alt = images[index].alt;
-      lightbox.classList.add("open");
+      openLightbox(images[index].src, images[index].alt);
     });
-  });
-
-  lightbox.addEventListener("click", () => {
-    lightbox.classList.remove("open");
-    lightboxImage.src = "";
   });
 };
 
 const initBooking = (data) => {
   const form = qs("[data-booking-form]");
+
+  if (!form) return;
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -87,9 +119,145 @@ const initBooking = (data) => {
     const name = formData.get("name");
     const service = formData.get("service");
     const date = formData.get("date");
-    const message = `Hello JO'STYLE, I would like to book an appointment.%0AName: ${name}%0AService: ${service}%0ADate: ${date}`;
+    const message = `Hello JO'STYLE, I would like to book an appointment.\nName: ${name}\nService: ${service}\nDate: ${date}`;
 
-    window.open(whatsappUrl(data.phone, decodeURIComponent(message)), "_blank", "noopener");
+    window.open(whatsappUrl(data.phone, message), "_blank", "noopener");
+  });
+};
+
+const getCarouselIndex = (carousel) => Number(carousel.dataset.activeIndex || 0);
+
+const setCarouselIndex = (carousel, index) => {
+  const slides = qsa(".saree-slide", carousel);
+  const dots = qsa(".saree-dot", carousel);
+  const total = slides.length;
+
+  if (!total) return;
+
+  const nextIndex = (index + total) % total;
+  carousel.dataset.activeIndex = String(nextIndex);
+
+  slides.forEach((slide, slideIndex) => {
+    slide.classList.toggle("active", slideIndex === nextIndex);
+  });
+
+  dots.forEach((dot, dotIndex) => {
+    dot.classList.toggle("active", dotIndex === nextIndex);
+  });
+};
+
+const startCarousel = (carousel) => {
+  const slides = qsa(".saree-slide", carousel);
+
+  if (slides.length <= 1) return;
+
+  const interval = Number(carousel.dataset.interval || 3600);
+  window.setInterval(() => {
+    setCarouselIndex(carousel, getCarouselIndex(carousel) + 1);
+  }, interval);
+};
+
+const renderSareeTypes = (data) => {
+  const sareeData = data.sareeSales;
+  const grid = qs("[data-saree-types]");
+
+  if (!sareeData || !grid) return;
+
+  document.title = `${data.businessName} | Saree Sales`;
+  setText("[data-saree-title]", sareeData.title);
+  setText("[data-saree-intro]", sareeData.intro);
+  setText("[data-saree-section-heading]", sareeData.sectionHeading);
+
+  const hero = qs("[data-saree-hero-bg]");
+  if (hero) {
+    hero.style.setProperty("--hero-image", `url("${sareeData.heroImage}")`);
+  }
+
+  grid.innerHTML = sareeData.types
+    .map(
+      (type, typeIndex) => `
+        <article class="saree-type-card reveal">
+          <div class="saree-carousel" data-active-index="0" data-interval="${type.interval || 3600}">
+            <div class="saree-slides">
+              ${type.images
+                .map(
+                  (image, imageIndex) => `
+                    <button
+                      class="saree-slide ${imageIndex === 0 ? "active" : ""}"
+                      type="button"
+                      data-saree-image="${image.src}"
+                      data-saree-alt="${image.alt}"
+                      aria-label="Open ${image.alt}"
+                    >
+                      <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+                    </button>
+                  `
+                )
+                .join("")}
+            </div>
+            <div class="saree-carousel-controls" aria-label="${type.name} gallery controls">
+              <button type="button" data-carousel-prev aria-label="Previous ${type.name} photo">Prev</button>
+              <div class="saree-dots">
+                ${type.images
+                  .map(
+                    (_, imageIndex) => `
+                      <button
+                        class="saree-dot ${imageIndex === 0 ? "active" : ""}"
+                        type="button"
+                        data-carousel-dot="${imageIndex}"
+                        aria-label="Show ${type.name} photo ${imageIndex + 1}"
+                      ></button>
+                    `
+                  )
+                  .join("")}
+              </div>
+              <button type="button" data-carousel-next aria-label="Next ${type.name} photo">Next</button>
+            </div>
+          </div>
+          <div class="saree-type-copy">
+            <p class="eyebrow">Saree Type ${typeIndex + 1}</p>
+            <h3>${type.name}</h3>
+            <p>${type.description}</p>
+            <span>${type.priceNote}</span>
+            <a
+              class="btn btn-primary"
+              href="${whatsappUrl(
+                data.phone,
+                `Hello JO'STYLE, I am interested in ${type.name}. Please share available saree photos, colors, and price details.`
+              )}"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Enquire on WhatsApp
+            </a>
+          </div>
+        </article>
+      `
+    )
+    .join("");
+
+  qsa(".saree-carousel", grid).forEach((carousel) => {
+    qs("[data-carousel-prev]", carousel).addEventListener("click", () => {
+      setCarouselIndex(carousel, getCarouselIndex(carousel) - 1);
+    });
+
+    qs("[data-carousel-next]", carousel).addEventListener("click", () => {
+      setCarouselIndex(carousel, getCarouselIndex(carousel) + 1);
+    });
+
+    qsa("[data-carousel-dot]", carousel).forEach((dot) => {
+      dot.addEventListener("click", () => {
+        setCarouselIndex(carousel, Number(dot.dataset.carouselDot));
+      });
+    });
+
+    qsa("[data-saree-image]", carousel).forEach((slide) => {
+      slide.addEventListener("click", () => {
+        openLightbox(slide.dataset.sareeImage, slide.dataset.sareeAlt);
+      });
+    });
+
+    startCarousel(carousel);
   });
 };
 
@@ -113,6 +281,8 @@ const initNavigation = () => {
   const toggle = qs(".nav-toggle");
   const links = qsa(".nav-links a");
 
+  if (!toggle) return;
+
   toggle.addEventListener("click", () => {
     const isOpen = document.body.classList.toggle("nav-open");
     toggle.setAttribute("aria-expanded", String(isOpen));
@@ -126,29 +296,34 @@ const initNavigation = () => {
   });
 };
 
-const renderSite = (data) => {
-  siteData = data;
+const renderHomePage = (data) => {
   document.title = `${data.businessName} | ${data.tagline}`;
 
-  setText("[data-business-name]", data.businessName);
-  setText("[data-tagline]", data.tagline);
-  setText("[data-address]", data.address);
   setText("[data-founder-name]", data.founder.name);
   setText("[data-founder-description]", data.founder.description);
 
-  qs("[data-hero-bg]").style.setProperty("--hero-image", `url("${data.images.hero}")`);
-  qs("[data-founder-image]").src = data.founder.image;
-  qs("[data-founder-image]").alt = data.founder.name;
+  const hero = qs("[data-hero-bg]");
+  if (hero) {
+    hero.style.setProperty("--hero-image", `url("${data.images.hero}")`);
+  }
 
-  setHref("[data-phone-link]", `tel:${cleanPhone(data.phone)}`);
-  setText("[data-phone-link]", data.phone);
-  setHref("[data-instagram]", data.instagram);
-  setHref("[data-map-link]", mapUrl(data.address));
-  setHref("[data-whatsapp-link]", whatsappUrl(data.phone));
+  const founderImage = qs("[data-founder-image]");
+  if (founderImage) {
+    founderImage.src = data.founder.image;
+    founderImage.alt = data.founder.name;
+  }
 
   renderServices(data.services);
   renderGallery(data.gallery);
   initBooking(data);
+};
+
+const renderSite = (data) => {
+  siteData = data;
+  setSharedContent(data);
+  renderHomePage(data);
+  renderSareeTypes(data);
+  initLightbox();
   initRevealAnimations();
 };
 

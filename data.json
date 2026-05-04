@@ -43,5 +43,58 @@
       "src": "images/sample2.jpg",
       "alt": "Ladies fashion services offered by JO'STYLE"
     }
-  ]
+  ],
+  "sareeSales": {
+    "title": "Saree Collection",
+    "intro": "Select a saree type, view example photos, and ask JO'STYLE for current availability on WhatsApp.",
+    "heroImage": "images/sarees/silk-1.jpg",
+    "sectionHeading": "Choose the saree type you want to ask about.",
+    "types": [
+      {
+        "name": "Silk Sarees",
+        "description": "Rich silk sarees for weddings, functions, and festive occasions.",
+        "priceNote": "Contact for latest designs and pricing",
+        "images": [
+          {
+            "src": "images/sarees/silk-1.jpg",
+            "alt": "Silk saree example 1"
+          },
+          {
+            "src": "images/sarees/silk-2.jpg",
+            "alt": "Silk saree example 2"
+          }
+        ]
+      },
+      {
+        "name": "Cotton Sarees",
+        "description": "Comfortable cotton sarees for daily wear, office wear, and simple occasions.",
+        "priceNote": "Contact for available colors and pricing",
+        "images": [
+          {
+            "src": "images/sarees/cotton-1.jpg",
+            "alt": "Cotton saree example 1"
+          },
+          {
+            "src": "images/sarees/cotton-2.jpg",
+            "alt": "Cotton saree example 2"
+          }
+        ]
+      },
+      {
+        "name": "Designer Sarees",
+        "description": "Boutique-style designer sarees for parties, receptions, and special events.",
+        "priceNote": "Contact for new arrivals and pricing",
+        "images": [
+          {
+            "src": "images/sarees/designer-1.jpg",
+            "alt": "Designer saree example 1"
+          },
+          {
+            "src": "images/sarees/designer-2.jpg",
+            "alt": "Designer saree example 2"
+          }
+        ]
+      }
+    ]
+  }
 }

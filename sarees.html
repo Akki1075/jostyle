@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Saree sales at JO'STYLE with silk, cotton, designer, and occasion saree options."
+    />
+    <title>JO'STYLE | Saree Sales</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="sarees-page">
+    <header class="site-header" id="top">
+      <nav class="navbar" aria-label="Primary navigation">
+        <a class="brand" href="index.html" data-business-name>JO'STYLE</a>
+        <button class="nav-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <div class="nav-links">
+          <a href="index.html#services">Services</a>
+          <a href="sarees.html">Saree Sales</a>
+          <a href="index.html#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero saree-hero" aria-label="JO'STYLE saree sales">
+        <div class="hero-bg" data-saree-hero-bg></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content reveal">
+          <p class="eyebrow">Saree Sales</p>
+          <h1 data-saree-title>Saree Collection</h1>
+          <p class="hero-tagline" data-saree-intro>
+            Select a saree type, view example photos, and enquire on WhatsApp.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#saree-types">View Sarees</a>
+            <a class="btn btn-ghost" href="index.html">Back to Main Site</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section saree-page-intro">
+        <div class="section-inner intro-grid reveal">
+          <div>
+            <p class="eyebrow">Curated Types</p>
+            <h2>Saree options shown with example pictures and quick enquiry.</h2>
+          </div>
+          <p>
+            Use the arrows to check pictures manually, or let the photos move automatically.
+            Replace the image files any time to keep the collection fresh.
+          </p>
+        </div>
+      </section>
+
+      <section class="section" id="saree-types">
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <p class="eyebrow">Available Sarees</p>
+            <h2 data-saree-section-heading>Choose the saree type you want to ask about.</h2>
+          </div>
+          <div class="saree-type-grid" data-saree-types></div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contact">
+        <div class="section-inner contact-grid">
+          <div class="contact-copy reveal">
+            <p class="eyebrow">Contact</p>
+            <h2>Ask for current saree availability.</h2>
+            <p class="contact-line"><span>Phone</span><a data-phone-link href="#">7893634888</a></p>
+            <p class="contact-line"><span>Address</span><strong data-address>Airport Road, Gadala, Rajahmundry - 533102</strong></p>
+            <p class="contact-line"><span>Instagram</span><a data-instagram href="#" target="_blank" rel="noreferrer">Follow JO'STYLE</a></p>
+            <div class="contact-actions">
+              <a class="btn btn-primary" data-map-link href="#" target="_blank" rel="noreferrer">Open Google Maps</a>
+              <a class="btn btn-ghost dark" data-whatsapp-link href="#" target="_blank" rel="noreferrer">WhatsApp</a>
+            </div>
+          </div>
+          <div class="contact-panel reveal">
+            <p class="panel-title">Saree Enquiry</p>
+            <dl>
+              <div>
+                <dt>How to order</dt>
+                <dd>Select a saree type and send the WhatsApp enquiry.</dd>
+              </div>
+              <div>
+                <dt>Photos</dt>
+                <dd>Example pictures can be replaced from the images folder.</dd>
+              </div>
+              <div>
+                <dt>Visit</dt>
+                <dd data-address>Airport Road, Gadala, Rajahmundry - 533102</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <button class="lightbox" type="button" data-lightbox aria-label="Close image preview">
+      <img src="" alt="" data-lightbox-image />
+    </button>
+
+    <a class="whatsapp-float" data-whatsapp-link href="#" target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp">
+      WA
+    </a>
+
+    <script src="script.js"></script>
+  </body>
+</html>

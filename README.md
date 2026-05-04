@@ -16,11 +16,18 @@ JO'STYLE/
     founder.jpg
     sample1.jpg
     sample2.jpg
+    sarees/
+      silk-1.jpg
+      silk-2.jpg
+      cotton-1.jpg
+      cotton-2.jpg
+      designer-1.jpg
+      designer-2.jpg
 ```
 
 ## How To Update Content
 
-Edit `data.json` to update the business name, tagline, phone number, address, Instagram link, services, founder details, and gallery images.
+Edit `data.json` to update the business name, tagline, phone number, address, Instagram link, services, founder details, gallery images, and saree sales content.
 
 You do not need to edit `index.html`, `style.css`, or `script.js` for normal content changes.
 
@@ -33,6 +40,9 @@ Recommended file names:
 - `images/hero.jpg` for the full-screen hero background
 - `images/founder.jpg` for Jyothi Yarramilli's founder photo
 - `images/sample1.jpg`, `images/sample2.jpg`, `images/sample3.jpg` for gallery images
+- `images/sarees/silk-1.jpg`, `images/sarees/silk-2.jpg` for silk saree examples
+- `images/sarees/cotton-1.jpg`, `images/sarees/cotton-2.jpg` for cotton saree examples
+- `images/sarees/designer-1.jpg`, `images/sarees/designer-2.jpg` for designer saree examples
 
 After adding a new gallery image, add it to `data.json` like this:
 
@@ -42,6 +52,45 @@ After adding a new gallery image, add it to `data.json` like this:
   "alt": "Maggam work blouse design"
 }
 ```
+
+## How To Update Saree Sales
+
+The Saree Sales page is `sarees.html`. It is linked from the main website navbar and hero button.
+
+To replace saree photos:
+
+1. Open the `images/sarees/` folder.
+2. Replace any file with a new photo using the same file name, for example replace `silk-1.jpg` with a new silk saree photo named exactly `silk-1.jpg`.
+3. Commit and push the changed image.
+
+To add a new saree type, edit the `sareeSales.types` list in `data.json`:
+
+```json
+{
+  "name": "Fancy Sarees",
+  "description": "Fancy sarees for parties and small functions.",
+  "priceNote": "Contact for latest stock and pricing",
+  "images": [
+    {
+      "src": "images/sarees/fancy-1.jpg",
+      "alt": "Fancy saree example 1"
+    },
+    {
+      "src": "images/sarees/fancy-2.jpg",
+      "alt": "Fancy saree example 2"
+    }
+  ]
+}
+```
+
+Then add the matching files:
+
+```text
+images/sarees/fancy-1.jpg
+images/sarees/fancy-2.jpg
+```
+
+Each saree type automatically scrolls through its images and also has manual `Prev` and `Next` buttons. The WhatsApp button automatically includes the selected saree type name.
 
 ## How To Preview Locally
 
